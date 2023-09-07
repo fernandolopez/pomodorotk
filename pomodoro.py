@@ -2,6 +2,8 @@ import time
 import tkinter as tk
 from tkinter import ttk
 
+import playsound
+
 
 class Timer:
     """
@@ -77,8 +79,13 @@ def update_clock(remainding):
     root.after(UPDATE_TIME_MS, timer.update)
 
 
+def alarm():
+    """Play the alarm sound"""
+    playsound.playsound("alarm.mp3", block=False)
+
+
 # Create a timer object
-timer = Timer(lambda: None, update_clock)
+timer = Timer(alarm, update_clock)
 
 # Pack the labels
 state_label.pack(padx=10, pady=10)
