@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pomodorotk"
-version = "0.0.1"
+version = "0.0.2a"
 description = ""
 authors = ["Fernando López <fernando.e.lopez@gmail.com>"]
 readme = "README.md"
