@@ -2,8 +2,7 @@ import time
 import tkinter as tk
 from tkinter import ttk
 
-import playsound
-
+from pydub import AudioSegment, playback
 
 class Timer:
     """
@@ -79,9 +78,11 @@ def update_clock(remainding):
     root.after(UPDATE_TIME_MS, timer.update)
 
 
+alarm_sound = AudioSegment.from_mp3("alarm.mp3")
+
 def alarm():
     """Play the alarm sound"""
-    playsound.playsound("alarm.mp3", block=False)
+    playback.play(alarm_sound)
 
 
 # Create a timer object
