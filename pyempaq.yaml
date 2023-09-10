@@ -1,0 +1,6 @@
+name: pomodorotk
+exec: 
+  entrypoint: ["-c", "from pomodorotk.pomodoro import main; main()"]
+dependencies:
+  - pydub
+  - ffmpeg-python
