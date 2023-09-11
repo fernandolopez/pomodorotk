@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
-from task import Task, TaskQueue
+
+from .resources import get_resource
+from .task import TaskQueue
 
 BUTTON_FONT = (None, 20)
 VISIBLE_POMODOROS = 8
@@ -10,23 +12,26 @@ TOMATO_SIZE = 32
 class TasksFrame:
     """Frame that contains all the tasks"""
 
-    tomato_small = None
-    tomato_small_progress = None
-    tomato_small_dis = None
+    tomato = None
+    tomato_progress = None
+    tomato_dis = None
 
     def __init__(self, parent_widget):
         self.task_queue = TaskQueue()
         self.frame = ttk.Frame(parent_widget)
 
-        if self.tomato_small is None:
+        if self.tomato is None:
             self.load_images()
 
     @classmethod
     def load_images(cls):
         """Load the images used by the tasks"""
-        cls.tomato_small = tk.PhotoImage(file="tomate_small.png")
-        cls.tomato_small_progress = tk.PhotoImage(file="tomate_small_progress.png")
-        cls.tomato_small_dis = tk.PhotoImage(file="tomate_small_dis.png")
+        with get_resource("tomato.png") as tomato:
+            cls.tomato = tk.PhotoImage(file=tomato)
+        with get_resource("tomato_progress.png") as tomato_progress:
+            cls.tomato_progress = tk.PhotoImage(file=tomato_progress)
+        with get_resource("tomato_dis.png") as tomato_dis:
+            cls.tomato_dis = tk.PhotoImage(file=tomato_dis)
 
     def pack(self, *args, **kwargs):
         """Pack the frame"""
@@ -70,14 +75,12 @@ class TasksFrame:
         for i in range(task.expected_pomodoros):
             offset = i // 4 * TOMATO_SIZE
             if i < active_pomodoro or (i == active_pomodoro and not task.started):
-                image = self.tomato_small
+                image = self.tomato
             elif i == active_pomodoro:
-                image = self.tomato_small_progress
+                image = self.tomato_progress
             else:
-                image = self.tomato_small_dis
-            canvas.create_image(
-                i * TOMATO_SIZE + offset, 0, image=image, anchor=tk.NW
-            )
+                image = self.tomato_dis
+            canvas.create_image(i * TOMATO_SIZE + offset, 0, image=image, anchor=tk.NW)
 
     def _create_task_frame(self, task):
         task_frame = ttk.Frame(self.frame)
