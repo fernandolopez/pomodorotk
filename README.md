@@ -17,12 +17,31 @@ or with pip:
 pip install pomodorotk
 ```
 
-Run
----
+### Run
 
 ```
 pomodoro
 ```
+
+Build single file executable
+----------------------------
+
+Install [PyEmpaq](https://pyempaq.readthedocs.io/)
+
+```
+# move to the directory containing this repo
+cd ..
+
+# build
+pyempaq pomodoro
+```
+
+Run with:
+
+```
+python pomodorotk.pyz
+```
+
 
 Develop
 -------
